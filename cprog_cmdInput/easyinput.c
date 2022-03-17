@@ -15,11 +15,80 @@ int error_check(int ret) {
       case DEALLOC_ERROR:
          fprintf(stderr, "Internal Free Error\n");
          break;
+      case EOF_REACHED:
+         fprintf(stderr, "EOF reached.\n");
+         break;
+      case NO_OBJECT:
+         fprintf(stderr, "No object given.\n");
+         break;
+      case NO_ARGV:
+         fprintf(stderr, "No argv given.\n");
+         break;
       default: 
          fprintf(stderr, "Undefined Error\n");
          break;
    }
    return ret;
+}
+
+/* Internal functions */
+int strip_newline(char *buffer, int size) {
+   if (buffer == NULL)
+      return FAIL;
+
+   if (size == 0)
+      return FAIL;
+
+   if (buffer[size - 1] != '\n')
+      return FAIL;
+   buffer[size - 1] = '\0'; 
+
+   return SUCCESS;
+}
+
+/* Get input from the user
+ * return a list of strings.
+ */
+int einput_run(EInput *object, 
+   char *disp,
+   int max_args, 
+   int max_arg_size,
+   char **einput_argv) {
+
+   int ret = -1;
+   int i = 0;
+   char *token = NULL;
+
+   if (object == NULL)
+      return NO_OBJECT;
+
+   if (einput_argv == NULL)
+      return NO_ARGV;
+
+   printf("%s", disp);
+   ret = getline(&(object->buffer), &(object->buffer_size), stdin); 
+
+   if (ret == EOF) {
+      einput_argv[0] = NULL;
+      return EOF_REACHED;
+   }
+
+   strip_newline(object->buffer, ret);
+
+   if (einput_argv == NULL)
+      return MALLOC_ERROR;
+
+   token = strtok(object->buffer, " ");
+   for (; i < max_args; i++) {
+      if (token == NULL) {
+         einput_argv[i] = NULL;
+         return SUCCESS;
+      }
+      einput_argv[i] = token;
+      token = strtok(NULL, " ");
+   }
+
+   return SUCCESS;
 }
 
 /* Create input interface */

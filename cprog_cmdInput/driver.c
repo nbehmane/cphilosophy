@@ -10,17 +10,28 @@
 #define FAIL -1
 #define SIZE 256
 #define FLAGS 0x00000000
+#define MAX_ARGS 10
+#define MAX_ARG_SIZE 10
 
 int main(void) {
    int ret = FAIL;
    EInput *input_object = einput_create(SIZE, FLAGS);
+   char **argv = (char **)malloc(sizeof(char *) * MAX_ARGS);
+   int i = 0;
    
    if (input_object == NULL)
       return FAIL;
 
+   ret = einput_run(input_object, "$ ", MAX_ARGS, MAX_ARG_SIZE, argv);
+
+   for (i = 0; i < MAX_ARGS && argv[i] != NULL; i++)
+      fprintf(stderr, "Arg: %s\n", argv[i]);
+   
+   
+      
    ret = einput_destroy(input_object);
    error_check(ret);
-      
+   free(argv);
 
    return SUCCESS;
 }
