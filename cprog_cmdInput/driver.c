@@ -26,11 +26,11 @@ int main(void) {
 
    for (i = 0; i < MAX_ARGS && argv[i] != NULL; i++)
       fprintf(stderr, "Arg: %s\n", argv[i]);
-   
-   
       
    ret = einput_destroy(input_object);
    error_check(ret);
+
+   // The user is responsible for freeing the argv array.
    free(argv);
 
    return SUCCESS;
