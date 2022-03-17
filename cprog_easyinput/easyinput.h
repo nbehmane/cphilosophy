@@ -12,12 +12,13 @@ typedef struct einput EInput;
 #define EOF_REACHED -4
 #define NO_OBJECT -5
 #define NO_ARGV -6
+#define WRONG_ARG -7
 
 /* Functions */
 int error_check(int ret);
 EInput *einput_create(int size, int flags);
 int einput_destroy(EInput *to_destroy);
-int einput_run(EInput *object, char *disp, int max_args, int max_arg_size, char **einput_argv); 
+int einput_run(EInput *object, char *disp, int max_args, char **einput_argv); 
 
 
 #endif

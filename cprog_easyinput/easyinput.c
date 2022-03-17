@@ -24,6 +24,9 @@ int error_check(int ret) {
       case NO_ARGV:
          fprintf(stderr, "No argv given.\n");
          break;
+      case WRONG_ARG:
+         fprintf(stderr, "Argument(s) are incorrect.\n");
+         break;
       default: 
          fprintf(stderr, "Undefined Error\n");
          break;
@@ -52,7 +55,6 @@ int strip_newline(char *buffer, int size) {
 int einput_run(EInput *object, 
    char *disp,
    int max_args, 
-   int max_arg_size,
    char **einput_argv) {
 
    int ret = -1;
@@ -64,6 +66,10 @@ int einput_run(EInput *object,
 
    if (einput_argv == NULL)
       return NO_ARGV;
+   
+   if (max_args <= 0)
+      return WRONG_ARG;
+   
 
    printf("%s", disp);
    ret = getline(&(object->buffer), &(object->buffer_size), stdin); 
@@ -74,9 +80,6 @@ int einput_run(EInput *object,
    }
 
    strip_newline(object->buffer, ret);
-
-   if (einput_argv == NULL)
-      return MALLOC_ERROR;
 
    token = strtok(object->buffer, " ");
    for (; i < max_args; i++) {
