@@ -8,3 +8,6 @@
 - Run `gcc *.c *.h -o demo` *will be a Makefile eventually.*
 - Run the demo.
 - Read the driver code to see the usage. *this will be expanded later*
+
+## Notes
+- This isn't thread safe. *add an explanation later.*
