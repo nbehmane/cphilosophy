@@ -14,5 +14,7 @@
 
 ## TODO
 - Have it get input from any stream, not just stdin.
+- Custom delimiter
+- Parallelize...
 - Make this into a library.
 
