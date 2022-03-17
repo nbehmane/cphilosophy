@@ -6,7 +6,7 @@ int error_check(int ret) {
    switch (ret) {
       case SUCCESS:
          break;
-      case GENERAL_ERROR:
+      case GENERAL_ERROR | FAIL:
          fprintf(stderr, "General Error\n");
          break;
       case MALLOC_ERROR:

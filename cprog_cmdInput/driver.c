@@ -23,6 +23,7 @@ int main(void) {
       return FAIL;
 
    ret = einput_run(input_object, "$ ", MAX_ARGS, MAX_ARG_SIZE, argv);
+   error_check(ret);
 
    for (i = 0; i < MAX_ARGS && argv[i] != NULL; i++)
       fprintf(stderr, "Arg: %s\n", argv[i]);
