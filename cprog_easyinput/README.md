@@ -11,3 +11,7 @@
 
 ## Notes
 - This isn't thread safe. *add an explanation later.*
+
+## TODO
+- Make this into a library.
+
