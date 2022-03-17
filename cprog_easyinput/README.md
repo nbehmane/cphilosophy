@@ -13,5 +13,6 @@
 - This isn't thread safe. *add an explanation later.*
 
 ## TODO
+- Have it get input from any stream, not just stdin.
 - Make this into a library.
 
