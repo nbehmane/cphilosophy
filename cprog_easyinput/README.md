@@ -16,5 +16,6 @@
 - Have it get input from any stream, not just stdin.
 - Custom delimiter
 - Parallelize...
+   - Separate implementations
 - Make this into a library.
 
