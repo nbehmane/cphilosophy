@@ -22,11 +22,14 @@ int main(void) {
    if (input_object == NULL)
       return FAIL;
 
-   ret = einput_run(input_object, "$ ", MAX_ARGS, MAX_ARG_SIZE, argv);
-   error_check(ret);
+   while(ret != EOF_REACHED) {
+      ret = einput_run(input_object, "$ ", MAX_ARGS, MAX_ARG_SIZE, argv);
 
-   for (i = 0; i < MAX_ARGS && argv[i] != NULL; i++)
-      fprintf(stderr, "Arg: %s\n", argv[i]);
+      for (i = 0; i < MAX_ARGS && argv[i] != NULL; i++)
+         fprintf(stderr, "Arg: %s\n", argv[i]);
+
+      error_check(ret);
+   }
       
    ret = einput_destroy(input_object);
    error_check(ret);
